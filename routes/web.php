@@ -28,7 +28,12 @@ Route::get('/play', function () {
     return view('game');
 })->middleware(['auth', 'verified']);
 
-Route::get('/win', [UserController::class, 'updatePoints'])->middleware(['auth', 'verified']);
+Route::get('/win', [UserController::class, 'update'])->middleware(['auth', 'verified']);
+
+/* Esta ruta está pensada para utilizar sin vista, crea un usuario por defecto */
+Route::get('/createUser', [UserController::class, 'createRoot'])->middleware(['auth', 'verified']);
+
+Route::get('/deleteUser', [UserController::class, 'destroy'])->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
